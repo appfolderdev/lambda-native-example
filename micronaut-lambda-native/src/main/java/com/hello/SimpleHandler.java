@@ -1,6 +1,5 @@
 package com.hello;
 
-import com.example.SimpleService;
 import io.micronaut.function.aws.MicronautRequestHandler;
 import jakarta.inject.Inject;
 import org.slf4j.Logger;

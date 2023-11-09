@@ -1,4 +1,4 @@
-package com.example;
+package com.hello;
 
 import jakarta.inject.Singleton;
 

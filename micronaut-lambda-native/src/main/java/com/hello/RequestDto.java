@@ -1,7 +1,5 @@
 package com.hello;
 
-//@Introspected
-//@Serdeable.Deserializable
 public class RequestDto {
     private String key1;
 
