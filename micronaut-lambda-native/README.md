@@ -1,75 +1,30 @@
-## Micronaut 4.1.6 Documentation
 
-- [User Guide](https://docs.micronaut.io/4.1.6/guide/index.html)
-- [API Reference](https://docs.micronaut.io/4.1.6/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/4.1.6/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
+# Execução
 
-## Handler
+Após publicado em lambda o artefato. 
+Executar o teste da lambda passando no formato SQS:
 
-Handler: io.micronaut.function.aws.proxy.payload1.ApiGatewayProxyRequestEventFunction
+    {
+      "Records": [
+        {
+          "messageId": "19dd0b57-b21e-4ac1-bd88-01bbb068cb78",
+          "receiptHandle": "MessageReceiptHandle",
+          "body": "from SQS!",
+          "attributes": {
+            "ApproximateReceiveCount": "1",
+            "SentTimestamp": "1523232000000",
+            "SenderId": "123456789012",
+            "ApproximateFirstReceiveTimestamp": "1523232000001"
+          },
+          "messageAttributes": {},
+          "md5OfBody": "{{{md5_of_body}}}",
+          "eventSource": "aws:sqs",
+          "eventSourceARN": "arn:aws:sqs:us-east-1:123456789012:MyQueue",
+          "awsRegion": "us-east-1"
+        }
+      ]
+    }
 
-[AWS Lambda Handler](https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html)
+O resultado esperado é retornar **ok** e imprimir nos logs:
 
-## Deployment with GraalVM
-
-If you want to deploy to AWS Lambda as a GraalVM native image, run:
-
-```bash
-./mvnw package -Dpackaging=docker-native -Dmicronaut.runtime=lambda -Pgraalvm
-```
-
-This will build the GraalVM native image inside a docker container and generate the `function.zip` ready for the deployment.
-
-
-- [Micronaut Maven Plugin documentation](https://micronaut-projects.github.io/micronaut-maven-plugin/latest/)
-## Feature http-client documentation
-
-- [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#nettyHttpClient)
-
-
-## Feature jetty-server documentation
-
-- [Micronaut Jetty Server documentation](https://micronaut-projects.github.io/micronaut-servlet/1.0.x/guide/index.html#jetty)
-
-
-## Feature micronaut-aot documentation
-
-- [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
-
-
-## Feature jax-rs documentation
-
-- [Micronaut JAX-RS support documentation](https://micronaut-projects.github.io/micronaut-jaxrs/latest/guide/index.html)
-
-
-## Feature maven-enforcer-plugin documentation
-
-- [https://maven.apache.org/enforcer/maven-enforcer-plugin/](https://maven.apache.org/enforcer/maven-enforcer-plugin/)
-
-
-## Feature aws-lambda-events-serde documentation
-
-- [Micronaut AWS Lambda Events Serde documentation](https://micronaut-projects.github.io/micronaut-aws/snapshot/guide/#eventsLambdaSerde)
-
-- [https://github.com/aws/aws-lambda-java-libs/tree/main/aws-lambda-java-events](https://github.com/aws/aws-lambda-java-libs/tree/main/aws-lambda-java-events)
-
-
-## Feature aws-lambda documentation
-
-- [Micronaut AWS Lambda Function documentation](https://micronaut-projects.github.io/micronaut-aws/latest/guide/index.html#lambda)
-
-
-## Feature serialization-jackson documentation
-
-- [Micronaut Serialization Jackson Core documentation](https://micronaut-projects.github.io/micronaut-serialization/latest/guide/)
-
-
-## Feature aws-lambda-custom-runtime documentation
-
-- [Micronaut Custom AWS Lambda runtime documentation](https://micronaut-projects.github.io/micronaut-aws/latest/guide/index.html#lambdaCustomRuntimes)
-
-- [https://docs.aws.amazon.com/lambda/latest/dg/runtimes-custom.html](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-custom.html)
-
-
+    hey from SQS!
