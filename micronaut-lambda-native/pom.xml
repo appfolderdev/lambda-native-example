@@ -39,17 +39,7 @@
         </dependency>
         <dependency>
             <groupId>io.micronaut.aws</groupId>
-            <artifactId>micronaut-aws-lambda-events-serde</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut.aws</groupId>
-            <artifactId>micronaut-function-aws-api-proxy</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut.aws</groupId>
-            <artifactId>micronaut-function-aws-api-proxy-test</artifactId>
+            <artifactId>micronaut-function-aws</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -63,34 +53,14 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut.serde</groupId>
-            <artifactId>micronaut-serde-jackson</artifactId>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-jackson-databind</artifactId>
             <scope>compile</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.micronaut.servlet</groupId>-->
-<!--            <artifactId>micronaut-http-server-jetty</artifactId>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut.test</groupId>
-            <artifactId>micronaut-test-junit5</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>

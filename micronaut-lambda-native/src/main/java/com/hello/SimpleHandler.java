@@ -1,15 +1,21 @@
 package com.hello;
 
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.example.SimpleService;
+import io.micronaut.function.aws.MicronautRequestHandler;
+import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class SimpleHandler implements RequestHandler<RequestDto, String> {
+public class SimpleHandler extends MicronautRequestHandler<RequestDto, String> {
+
+    @Inject
+    private SimpleService service;
+
+    private static Logger logger = LoggerFactory.getLogger(SimpleHandler.class);
 
     @Override
-    public String handleRequest(RequestDto s, Context context) {
-        LambdaLogger logger = context.getLogger();
-        logger.log("hey " + s.getKey1());
+    public String execute(RequestDto input) {
+        logger.info(service.sayHello(input.getKey1()));
         return "ok";
     }
 }
