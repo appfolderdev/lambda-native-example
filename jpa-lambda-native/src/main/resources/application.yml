@@ -1,6 +1,6 @@
 micronaut:
   application:
-    name: backend
+    name: jpa-lambda-native
 datasources:
   default:
     driver-class-name: org.postgresql.Driver

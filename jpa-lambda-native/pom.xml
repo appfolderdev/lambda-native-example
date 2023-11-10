@@ -18,8 +18,8 @@
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
         <micronaut.version>4.1.6</micronaut.version>
-        <micronaut.runtime>netty</micronaut.runtime>
-<!--        <micronaut.runtime>lambda</micronaut.runtime>-->
+<!--        <micronaut.runtime>netty</micronaut.runtime>-->
+        <micronaut.runtime>lambda</micronaut.runtime>
     </properties>
 
     <dependencies>
@@ -49,6 +49,11 @@
             <artifactId>slf4j-simple</artifactId>
             <scope>runtime</scope>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>ch.qos.logback</groupId>-->
+<!--            <artifactId>logback-classic</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-lambda-java-events</artifactId>
@@ -86,9 +91,25 @@
     <build>
         <finalName>product-binary</finalName>
         <plugins>
+<!--            <plugin>-->
+<!--                <groupId>io.micronaut.maven</groupId>-->
+<!--                <artifactId>micronaut-maven-plugin</artifactId>-->
+<!--            </plugin>-->
             <plugin>
-                <groupId>io.micronaut.maven</groupId>
-                <artifactId>micronaut-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -105,34 +126,13 @@
                         </path>
                         <path>
                             <groupId>io.micronaut</groupId>
-                            <artifactId>micronaut-inject-java</artifactId>
-                            <version>${micronaut.core.version}</version>
-                        </path>
-                        <path>
-                            <groupId>io.micronaut.data</groupId>
-                            <artifactId>micronaut-data-processor</artifactId>
-                            <version>${micronaut.data.version}</version>
-                            <exclusions>
-                                <exclusion>
-                                    <groupId>io.micronaut</groupId>
-                                    <artifactId>micronaut-inject</artifactId>
-                                </exclusion>
-                            </exclusions>
-                        </path>
-                        <path>
-                            <groupId>io.micronaut</groupId>
                             <artifactId>micronaut-graal</artifactId>
-                            <version>${micronaut.core.version}</version>
-                        </path>
-                        <path>
-                            <groupId>io.micronaut</groupId>
-                            <artifactId>micronaut-http-validation</artifactId>
                             <version>${micronaut.core.version}</version>
                         </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
                         <arg>-Amicronaut.processing.group=com.hello</arg>
-                        <arg>-Amicronaut.processing.module=demo</arg>
+                        <arg>-Amicronaut.processing.module=jpa-lambda-native</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
