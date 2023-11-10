@@ -29,11 +29,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut.aws</groupId>
-            <artifactId>micronaut-function-aws-custom-runtime</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-jackson-databind</artifactId>
             <scope>compile</scope>

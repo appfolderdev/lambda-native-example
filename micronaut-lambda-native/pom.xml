@@ -19,6 +19,7 @@
         <release.version>17</release.version>
         <micronaut.version>4.1.6</micronaut.version>
         <micronaut.runtime>lambda</micronaut.runtime>
+        <exec.mainClass>io.micronaut.function.aws.runtime.MicronautLambdaRuntime</exec.mainClass>
     </properties>
 
     <dependencies>
@@ -31,6 +32,12 @@
             <groupId>io.micronaut.aws</groupId>
             <artifactId>micronaut-function-aws-custom-runtime</artifactId>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-lambda-java-runtime-interface-client</artifactId>
+            <version>2.4.1</version>
+            <!--classifier>linux-x86_64</classifier-->
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
@@ -53,20 +60,8 @@
         <finalName>product-binary</finalName>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.3</version>
-                <configuration>
-                    <createDependencyReducedPom>false</createDependencyReducedPom>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>io.micronaut.maven</groupId>
+                <artifactId>micronaut-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
@@ -89,7 +84,7 @@
                         </executions>
                         <configuration>
                             <imageName>product-binary</imageName>
-                            <mainClass>io.micronaut.function.aws.runtime.MicronautLambdaRuntime</mainClass>
+                            <mainClass>com.amazonaws.services.lambda.runtime.api.client.AWSLambda</mainClass>
                             <buildArgs combine.children="append">
                                 --verbose
                                 --no-fallback
