@@ -1,33 +1,32 @@
 package com.hello;
 
+import io.micronaut.context.annotation.Prototype;
 import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-@Singleton
+@Prototype
 public class SimpleService {
 
     @Inject
-    private Connection connection;
+    private SessionFactory connection;
+
     private static Logger logger = LoggerFactory.getLogger(SimpleService.class);
 
-    public String sayHello(String to) throws SQLException {
+    public String sayHello(String to) {
         logger.info("buscando usuario: " + to);
         String name;
-        try (Statement stmt = connection.createStatement();) {
-            ResultSet rs;
-            rs = stmt.executeQuery("SELECT u.full_name FROM vdi.users u WHERE u.email = '" + to + "'");
-            if (rs.next()) {
-                name = rs.getString("full_name");
-            } else {
+        try (Session session = connection.openSession()) {
+            session.beginTransaction();
+            UserEntity user = session.find(UserEntity.class, Long.valueOf(to));
+            if (user == null) {
                 name = "not found";
+            } else {
+                name = user.getName();
             }
+            session.getTransaction().commit();
         }
         return "hey " + name;
     }

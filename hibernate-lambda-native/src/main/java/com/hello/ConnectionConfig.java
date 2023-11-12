@@ -4,12 +4,13 @@ import io.micronaut.context.annotation.Bean;
 import io.micronaut.context.annotation.Factory;
 import io.micronaut.context.annotation.Value;
 import jakarta.inject.Singleton;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import static java.text.MessageFormat.format;
 
@@ -29,17 +30,26 @@ public class ConnectionConfig {
 
     @Bean
     @Singleton
-    public Connection getConnection() throws SQLException {
+    public SessionFactory getConnection() throws SQLException {
         logger.info(format("iniciando conexão com o bd {0}...", url));
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(url, user, pass);
-        } catch (SQLException e) {
-            logger.error("erro na conexçao", e);
-            throw e;
-        }
+
+        Properties prop = new Properties();
+        prop.setProperty("hibernate.connection.url", url);
+        prop.setProperty("hibernate.connection.username", user);
+        prop.setProperty("hibernate.connection.password", pass);
+        prop.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        prop.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
+        prop.setProperty("hibernate.show_sql", "true");
+        prop.setProperty("hibernate.default_schema", "vdi");
+        prop.setProperty("hibernate.hbm2ddl.auto", "none");
+
+        SessionFactory sessionFactory = new Configuration()
+                .addProperties(prop)
+                .addAnnotatedClass(UserEntity.class)
+                .buildSessionFactory();
+
         logger.info("conexão estabelecida!");
-        return connection;
+        return sessionFactory;
     }
 
 }
