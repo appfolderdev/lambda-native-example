@@ -53,7 +53,7 @@ Thumbs.db
 .gradle
 build/
 out/
-.micronaut/
+.micronaut
 .idea
 *.iml
 *.ipr
