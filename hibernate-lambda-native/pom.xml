@@ -19,6 +19,9 @@
         <release.version>17</release.version>
         <micronaut.version>4.1.6</micronaut.version>
         <micronaut.runtime>lambda</micronaut.runtime>
+        <!--        <micronaut.runtime>netty</micronaut.runtime>-->
+        <mainClass>com.amazonaws.services.lambda.runtime.api.client.AWSLambda</mainClass>
+        <!--        <mainClass>com.hello.Application</mainClass>-->
     </properties>
 
     <dependencies>
@@ -52,11 +55,23 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
-            <groupId>org.hibernate.orm</groupId>
-            <artifactId>hibernate-core</artifactId>
-<!--            <version>6.0.0.Alpha8</version>-->
+            <groupId>io.micronaut.data</groupId>
+            <artifactId>micronaut-data-hibernate-jpa</artifactId>
+            <scope>compile</scope>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.hibernate.orm</groupId>-->
+        <!--            <artifactId>hibernate-core</artifactId>-->
+        <!--            <version>6.1.1.Final</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.hibernate.orm</groupId>-->
+        <!--            <artifactId>hibernate-graalvm</artifactId>-->
+        <!--            <version>6.3.1.Final</version>-->
+        <!--            &lt;!&ndash;            <type>pom</type>&ndash;&gt;-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -93,6 +108,17 @@
                             <version>${micronaut.core.version}</version>
                         </path>
                         <path>
+                            <groupId>io.micronaut.data</groupId>
+                            <artifactId>micronaut-data-processor</artifactId>
+                            <version>${micronaut.data.version}</version>
+                            <exclusions>
+                                <exclusion>
+                                    <groupId>io.micronaut</groupId>
+                                    <artifactId>micronaut-inject</artifactId>
+                                </exclusion>
+                            </exclusions>
+                        </path>
+                        <path>
                             <groupId>io.micronaut</groupId>
                             <artifactId>micronaut-graal</artifactId>
                             <version>${micronaut.core.version}</version>
@@ -125,7 +151,7 @@
                         </executions>
                         <configuration>
                             <imageName>product-binary</imageName>
-                            <mainClass>com.amazonaws.services.lambda.runtime.api.client.AWSLambda</mainClass>
+                            <mainClass>${mainClass}</mainClass>
                             <buildArgs combine.children="append">
                                 --verbose
                                 --no-fallback
