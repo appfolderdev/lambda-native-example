@@ -1,0 +1,10 @@
+micronaut:
+  application:
+    name: micronaut-jdbc-gradle
+datasources:
+  default:
+    driver-class-name: org.postgresql.Driver
+    db-type: postgres
+    schema-generate: none
+    dialect: POSTGRES
+    schema: vdi
