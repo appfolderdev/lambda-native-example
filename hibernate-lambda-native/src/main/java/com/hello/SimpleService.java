@@ -25,6 +25,7 @@ public class SimpleService {
                 name = "not found";
             } else {
                 name = user.getName();
+                logger.info(" usuario encontrado: " + name);
             }
             session.getTransaction().commit();
         }

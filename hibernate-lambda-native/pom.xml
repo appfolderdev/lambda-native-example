@@ -18,10 +18,8 @@
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
         <micronaut.version>4.1.6</micronaut.version>
-        <micronaut.runtime>lambda</micronaut.runtime>
-        <!--        <micronaut.runtime>netty</micronaut.runtime>-->
-        <mainClass>com.amazonaws.services.lambda.runtime.api.client.AWSLambda</mainClass>
-        <!--        <mainClass>com.hello.Application</mainClass>-->
+                <micronaut.runtime>lambda</micronaut.runtime>
+<!--        <micronaut.runtime>netty</micronaut.runtime>-->
     </properties>
 
     <dependencies>
@@ -34,6 +32,7 @@
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-lambda-java-runtime-interface-client</artifactId>
             <version>2.4.1</version>
+            <!--classifier>linux-x86_64</classifier-->
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
@@ -57,23 +56,6 @@
         </dependency>
 
         <dependency>
-            <groupId>io.micronaut.data</groupId>
-            <artifactId>micronaut-data-hibernate-jpa</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.hibernate.orm</groupId>-->
-        <!--            <artifactId>hibernate-core</artifactId>-->
-        <!--            <version>6.1.1.Final</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.hibernate.orm</groupId>-->
-        <!--            <artifactId>hibernate-graalvm</artifactId>-->
-        <!--            <version>6.3.1.Final</version>-->
-        <!--            &lt;!&ndash;            <type>pom</type>&ndash;&gt;-->
-        <!--        </dependency>-->
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
@@ -82,6 +64,12 @@
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-http-server-netty</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.2.13.Final</version>
         </dependency>
     </dependencies>
 
@@ -106,17 +94,6 @@
                             <groupId>io.micronaut</groupId>
                             <artifactId>micronaut-inject-java</artifactId>
                             <version>${micronaut.core.version}</version>
-                        </path>
-                        <path>
-                            <groupId>io.micronaut.data</groupId>
-                            <artifactId>micronaut-data-processor</artifactId>
-                            <version>${micronaut.data.version}</version>
-                            <exclusions>
-                                <exclusion>
-                                    <groupId>io.micronaut</groupId>
-                                    <artifactId>micronaut-inject</artifactId>
-                                </exclusion>
-                            </exclusions>
                         </path>
                         <path>
                             <groupId>io.micronaut</groupId>
@@ -151,7 +128,7 @@
                         </executions>
                         <configuration>
                             <imageName>product-binary</imageName>
-                            <mainClass>${mainClass}</mainClass>
+                            <mainClass>com.amazonaws.services.lambda.runtime.api.client.AWSLambda</mainClass>
                             <buildArgs combine.children="append">
                                 --verbose
                                 --no-fallback
