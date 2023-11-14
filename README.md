@@ -77,6 +77,18 @@ Arquitetura
 
     x86_64
 
+# Configuração
+
+## Banco de dados
+
+Os módulos que conectam a um banco de dados usam as seguintes variáveis de ambiente:
+
+    DATASOURCES_DEFAULT_PASSWORD=postgres
+    DATASOURCES_DEFAULT_URL=jdbc:postgresql://localhost:5432/postgres
+    DATASOURCES_DEFAULT_USERNAME=postgres
+
+O script para inicialização da base fica em **/config**
+
 # Execução
 
 Para execução, leia o README da cada módulo.

@@ -35,4 +35,11 @@ O resultado esperado é retornar:
 
 # Build nativo
 
+```
 docker run -v <projeto local>:/project aws-lambda-native-builder ./gradlew clean nativeCompile
+```
+
+gerar um zip contendo o executável nativo e o bootstrap:
+
+- /build/native/nativeCompile/micronaut-jdbc-gradle
+- /packages/bootstrap
