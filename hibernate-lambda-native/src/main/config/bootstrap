@@ -1,3 +1,0 @@
-#!/bin/bash
-
-./product-binary $_HANDLER

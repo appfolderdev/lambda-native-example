@@ -25,14 +25,14 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.yaml:snakeyaml")
-    testImplementation("io.micronaut:micronaut-http-client")
-//    compileOnly("org.graalvm.nativeimage:svm")
+    implementation("io.micronaut.aws:micronaut-function-aws-custom-runtime")
     implementation("io.micronaut.aws:micronaut-function-aws-api-proxy")
 }
 
 
 application {
-    mainClass.set("com.example.Application")
+    mainClass.set("io.micronaut.function.aws.runtime.MicronautLambdaRuntime")
+//    mainClass.set("com.example.Application")
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("17")
