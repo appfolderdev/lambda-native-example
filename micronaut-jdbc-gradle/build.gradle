@@ -13,25 +13,31 @@ repositories {
 }
 
 dependencies {
-    annotationProcessor("org.projectlombok:lombok")
+    // db
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
-    annotationProcessor("io.micronaut:micronaut-http-validation")
-    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     implementation("io.micronaut.data:micronaut-data-jdbc")
-    implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
-    compileOnly("io.micronaut:micronaut-http-client")
-    compileOnly("org.projectlombok:lombok")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.postgresql:postgresql")
+
+    // basic
     runtimeOnly("org.yaml:snakeyaml")
+    annotationProcessor("org.projectlombok:lombok")
+    compileOnly("org.projectlombok:lombok")
+    implementation("io.micronaut:micronaut-jackson-databind")
+
+    // AWS
     implementation("io.micronaut.aws:micronaut-function-aws-custom-runtime")
-    implementation("io.micronaut.aws:micronaut-function-aws-api-proxy")
+    implementation("io.micronaut.aws:micronaut-function-aws")
+    implementation("com.amazonaws:aws-lambda-java-events")
+    implementation("com.amazonaws:aws-lambda-java-runtime-interface-client:2.4.1")
+
 }
 
 
 application {
-    mainClass.set("io.micronaut.function.aws.runtime.MicronautLambdaRuntime")
+//    mainClass.set("io.micronaut.function.aws.runtime.MicronautLambdaRuntime")
+    mainClass.set("com.amazonaws.services.lambda.runtime.api.client.AWSLambda")
 //    mainClass.set("com.example.Application")
 }
 java {

@@ -18,4 +18,4 @@ io.micronaut.function.aws.proxy.MicronautLambdaHandler
 
 # Build
 
-docker run -v <local project>:/project aws-lambda-native-builder ./gradlew nativeCompile
+docker run -v E:\src\lambda-native\lambda-native-example\micronaut-jdbc-gradle:/project aws-lambda-native-builder  ./gradlew clean nativeCompile
