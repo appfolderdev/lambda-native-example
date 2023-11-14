@@ -25,7 +25,7 @@
     <dependencies>
         <dependency>
             <groupId>io.micronaut.aws</groupId>
-            <artifactId>micronaut-function-aws</artifactId>
+            <artifactId>micronaut-function-aws-api-proxy</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -42,6 +42,11 @@
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-lambda-java-events</artifactId>
             <version>3.11.3</version>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-http-server-netty</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>

@@ -1,8 +1,11 @@
+# Descrição
+
+Este é um módulo com micronaut que recebe um evento de uma fila SQS.
+Este módulo está apto a ser compilado de forma nativa.
 
 # Execução
 
-Após publicado em lambda o artefato. 
-Executar o teste da lambda passando no formato SQS:
+JSON do evento (SQS):
 
     {
       "Records": [

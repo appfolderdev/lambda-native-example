@@ -15,7 +15,8 @@ public class SimpleHandler extends MicronautRequestHandler<SQSEvent, String> {
 
     @Override
     public String execute(SQSEvent input) {
-        logger.info(service.sayHello(input.getRecords().get(0).getBody()));
-        return "ok";
+        String msg = service.sayHello(input.getRecords().get(0).getBody());
+        logger.info(msg);
+        return msg;
     }
 }

@@ -1,8 +1,10 @@
+# Descrição
+
+Este é um módulo Java puro com o jdk lambda.
 
 # Execução
 
-Após publicado em lambda o artefato. 
-Executar o teste da lambda passando:
+JSON do evento:
 
     {
         "key1": "value1",

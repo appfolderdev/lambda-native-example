@@ -1,8 +1,11 @@
+# Descrição
+
+Este é um módulo com micronaut que recebe um evento de uma fila SQS, 
+consulta uma base RDS postgres, usando uma conexão JDBC básica, e retorna o resultado.
 
 # Execução
 
-Após publicado em lambda o artefato. 
-Executar o teste da lambda passando no formato SQS:
+JSON do evento (SQS):
 
     {
       "Records": [
@@ -25,6 +28,6 @@ Executar o teste da lambda passando no formato SQS:
       ]
     }
 
-O resultado esperado é retornar **ok** e imprimir nos logs:
+O resultado esperado é retornar:
 
-    hey from SQS!
+    hey Joao Silva!
